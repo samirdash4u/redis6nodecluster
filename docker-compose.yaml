@@ -1,0 +1,34 @@
+services:
+  redis-1: &redis-node
+    image: redis:7.2
+    container_name: redis-1
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./certs:/certs
+    networks:
+      - redis-net
+
+  redis-2:
+    <<: *redis-node
+    container_name: redis-2
+
+  redis-3:
+    <<: *redis-node
+    container_name: redis-3
+
+  redis-4:
+    <<: *redis-node
+    container_name: redis-4
+
+  redis-5:
+    <<: *redis-node
+    container_name: redis-5
+
+  redis-6:
+    <<: *redis-node
+    container_name: redis-6
+
+networks:
+  redis-net:
+    driver: bridge
